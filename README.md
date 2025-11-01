@@ -11,6 +11,40 @@ SmartCab Reservation is an Android application built with Kotlin and Jetpack Com
 - **User Profile**: Manage personal information and settings.
 - **Splash Screen**: Engaging startup experience.
 
+## Screenshots
+
+Here are screenshots of the key screens in the SmartCab Reservation app:
+
+### Splash Screen
+![Splash Screen](screenshots/splash_screen.png)
+*The initial screen displayed when the app launches.*
+
+### Login Screen
+![Login Screen](screenshots/login_screen.png)
+*User authentication screen for logging in or signing up.*
+
+### Home Screen
+![Home Screen](screenshots/home_screen.png)
+*Main screen for booking rides, entering pickup and destination locations.*
+
+### Ride Details Screen
+![Ride Details Screen](screenshots/ride_details_screen.png)
+*Displays estimated fare, time, and distance for the selected ride.*
+
+### Tracking Screen
+![Tracking Screen](screenshots/tracking_screen.png)
+*Real-time tracking of the driver's location and ETA.*
+
+### History Screen
+![History Screen](screenshots/history_screen.png)
+*View past rides and their details.*
+
+### Profile Screen
+![Profile Screen](screenshots/profile_screen.png)
+*User profile management and settings.*
+
+*Note: Screenshots are placeholders. To add actual screenshots, capture them from the running app in Android Studio or on a device, save them in a `screenshots/` folder in the project root, and update the image paths accordingly.*
+
 ## Technologies Used
 
 - **Language**: Kotlin
