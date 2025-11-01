@@ -1,6 +1,6 @@
-# SmartCab Reservation
+# SmartCab
 
-SmartCab Reservation is an Android application built with Kotlin and Jetpack Compose that allows users to book and track cab rides conveniently. The app provides features like user authentication, ride booking, real-time tracking, ride history, and user profile management.
+SmartCab is an Android application built with Kotlin and Jetpack Compose that allows users to book and track cab rides conveniently. The app includes an ML Backend using Flask and K-Means clustering for intelligent ride matching. Features include user authentication, ride booking, real-time tracking, ride history, user profile management, and clustering-based ride suggestions.
 
 ## Features
 
@@ -10,6 +10,7 @@ SmartCab Reservation is an Android application built with Kotlin and Jetpack Com
 - **Ride History**: View past rides and details.
 - **User Profile**: Manage personal information and settings.
 - **Splash Screen**: Engaging startup experience.
+- **ML-Based Ride Matching**: Uses K-Means clustering to group users for efficient ride sharing.
 
 ## Screenshots
 
@@ -54,6 +55,7 @@ Here are screenshots of the key screens in the SmartCab Reservation app:
 - **Architecture**: MVVM (Model-View-ViewModel)
 - **Minimum SDK**: API 24 (Android 7.0)
 - **Target SDK**: API 35 (Android 15)
+- **ML Backend**: Flask, scikit-learn, numpy
 
 ## Dependencies
 
@@ -68,6 +70,14 @@ The app uses the following key dependencies:
 - JUnit and Espresso for testing
 
 For a complete list of dependencies and versions, refer to `gradle/libs.versions.toml`.
+
+### ML Backend Dependencies
+
+- Flask
+- scikit-learn
+- numpy
+
+For the ML service, refer to `ml_service/requirements.txt`.
 
 ## Getting Started
 
@@ -90,6 +100,25 @@ For a complete list of dependencies and versions, refer to `gradle/libs.versions
 
 4. Build and run the app on an emulator or physical device.
 
+### Running the ML Backend
+
+1. Navigate to the `ml_service` directory:
+   ```
+   cd ml_service
+   ```
+
+2. Install dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+
+3. Run the Flask server:
+   ```
+   python app.py
+   ```
+
+The ML service will be available at `http://localhost:5000`.
+
 ### Configuration
 
 - Ensure you have a Google Maps API key for map functionality. Add it to your `local.properties` file:
@@ -97,44 +126,112 @@ For a complete list of dependencies and versions, refer to `gradle/libs.versions
   MAPS_API_KEY=your_api_key_here
   ```
 
+## ML Backend
+
+The ML Backend is a Flask-based service that provides K-Means clustering for ride matching. It groups users based on their pickup and destination locations, along with pickup time, to suggest efficient ride-sharing options.
+
+### API Endpoint
+
+- **POST /cluster**: Accepts a JSON payload with user data and returns cluster labels.
+
+Example request:
+```json
+{
+  "users": [
+    {
+      "pickup": [lat1, lon1],
+      "dest": [lat2, lon2],
+      "time": 1234567890
+    }
+  ]
+}
+```
+
+Example response:
+```json
+{
+  "clusters": [0, 1, 2, ...]
+}
+```
+
+### Code
+
+#### ml_service/app.py
+```python
+from flask import Flask, request, jsonify
+from sklearn.cluster import KMeans
+import numpy as np
+
+app = Flask(__name__)
+
+@app.route('/cluster', methods=['POST'])
+def cluster_users():
+    data = request.get_json()
+    users = data.get('users', [])
+
+    if not users:
+        return jsonify({'error': 'No user data provided'}), 400
+
+    # Convert user data into numeric array: [pickup_lat, pickup_lon, dest_lat, dest_lon, time]
+    X = np.array([u['pickup'] + u['dest'] + [u['time']] for u in users])
+
+    # Run K-Means clustering (3 groups)
+    kmeans = KMeans(n_clusters=3, random_state=42)
+    labels = kmeans.fit_predict(X)
+
+    # Return cluster labels
+    return jsonify({'clusters': labels.tolist()})
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+```
+
+#### ml_service/requirements.txt
+```
+flask
+scikit-learn
+numpy
+```
+
 ## Project Structure
 
 ```
-SmartCabReservation/
+SmartCab/
+│
 ├── app/
 │   ├── src/
 │   │   ├── main/
-│   │   │   ├── java/com/example/smartcabreservation/
+│   │   │   ├── AndroidManifest.xml
+│   │   │   ├── java/com/example/smartcab/
 │   │   │   │   ├── SplashActivity.kt
 │   │   │   │   ├── LoginActivity.kt
-│   │   │   │   ├── HomeActivity.kt
-│   │   │   │   ├── RideDetailsActivity.kt
+│   │   │   │   ├── HomeActivity.kt        ← (Main screen where user enters pickup/destination)
 │   │   │   │   ├── TrackingActivity.kt
-│   │   │   │   ├── HistoryActivity.kt
+│   │   │   │   ├── RideDetailsActivity.kt
 │   │   │   │   ├── ProfileActivity.kt
-│   │   │   │   └── ui/theme/
-│   │   │   │       ├── Color.kt
-│   │   │   │       ├── Theme.kt
-│   │   │   │       └── Type.kt
-│   │   │   ├── res/
-│   │   │   │   ├── drawable/
-│   │   │   │   ├── layout/
-│   │   │   │   ├── mipmap/
-│   │   │   │   ├── values/
-│   │   │   │   └── xml/
-│   │   │   └── AndroidManifest.xml
-│   │   ├── androidTest/
+│   │   │   │   ├── HistoryActivity.kt
+│   │   ├── res/
+│   │   │   ├── layout/
+│   │   │   │   ├── activity_home.xml  ← (UI with map + input)
+│   │   │   ├── drawable/
+│   │   │   │   ├── map_preview.png
+│   │   │   │   ├── ic_cab_logo.png
+│   │   │   │   ├── rounded_white_bg.xml
+│   │   │   │   ├── edittext_bg.xml
+│   │   ├── values/
+│   │   │   ├── colors.xml
+│   │   │   ├── strings.xml
+│   │   │   ├── themes.xml
+│   │   │   ├── styles.xml
 │   │   └── test/
-│   ├── build.gradle.kts
-│   └── proguard-rules.pro
-├── gradle/
-│   ├── libs.versions.toml
-│   └── wrapper/
-├── build.gradle.kts
-├── settings.gradle.kts
-├── gradlew
-├── gradlew.bat
-├── screenshots/
+│   └── build.gradle
+│
+├── ml_service/
+│   ├── app.py                    ← Flask API for K-Means
+│   ├── requirements.txt
+│
+├── build.gradle
+├── settings.gradle
 └── README.md
 ```
 
