@@ -43,7 +43,7 @@ Here are screenshots of the key screens in the SmartCab Reservation app:
 ![Profile Screen](screenshots/profile_screen.png)
 *User profile management and settings.*
 
-*Note: Screenshots are placeholders. To add actual screenshots, capture them from the running app in Android Studio or on a device, save them in a `screenshots/` folder in the project root, and update the image paths accordingly.*
+*Note: Screenshots are placeholders. To add actual screenshots, capture them from the running app in Android Studio or on a device, save them in the `screenshots/` folder in the project root, and update the image paths accordingly.*
 
 ## Technologies Used
 
@@ -134,6 +134,7 @@ SmartCabReservation/
 ├── settings.gradle.kts
 ├── gradlew
 ├── gradlew.bat
+├── screenshots/
 └── README.md
 ```
 
