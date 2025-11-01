@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="16dp"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ride_details"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/est_fare"
+        android:textSize="16sp" />
+
+    <RadioGroup
+        android:id="@+id/rgVehicle"
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton android:id="@+id/rbMini" android:text="Mini"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RadioButton android:id="@+id/rbSedan" android:text="Sedan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RadioButton android:id="@+id/rbSuv" android:text="SUV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnConfirmRide"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/confirm_ride"
+        android:backgroundTint="@color/primary"
+        android:textColor="@android:color/white"/>
+</LinearLayout>

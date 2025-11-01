@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Static Map Image -->
+    <ImageView
+        android:id="@+id/mapImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/map_preview" />
+
+    <!-- Bottom Panel -->
+    <LinearLayout
+        android:id="@+id/bottomPanel"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:background="@drawable/rounded_white_bg"
+        android:elevation="8dp"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edtPickup"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/hint_pickup"
+            android:background="@drawable/edittext_bg"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/edtDestination"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/hint_destination"
+            android:background="@drawable/edittext_bg"
+            android:padding="12dp" />
+        <EditText
+            android:id="@+id/edtTime"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/hint_Time"
+            android:background="@drawable/edittext_bg"
+            android:padding="12dp" />
+        <Button
+            android:id="@+id/btnFindCab"
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/find_cab"
+            android:backgroundTint="@color/primary"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</RelativeLayout>

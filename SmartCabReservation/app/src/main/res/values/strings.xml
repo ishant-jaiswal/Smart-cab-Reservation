@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">SmartCab</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="hint_pickup">Current Location</string>
+    <string name="hint_destination">Enter Destination</string>
+    <string name="hint_Time">Enter Pick-up Time</string>
+    <string name="find_cab">Find Cab</string>
+    <string name="ride_details">Ride Details</string>
+    <string name="est_fare">Estimated fare • 12 mins • 5.2 km</string>
+    <string name="confirm_ride">Confirm Ride</string>
+    <string name="driver_on_the_way">Driver is on the way</string>
+    <string name="eta_short">ETA 7 mins</string>
+    <string name="history">History</string>
+    <string name="profile">Profile</string>
+    <string name="ride_history">Ride History</string>
+    <string name="logout">Logout</string>
+</resources>
